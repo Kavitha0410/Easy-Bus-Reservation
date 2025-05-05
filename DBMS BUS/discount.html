@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Discounts</title>
+  <style>
+    /* Add a bus image as the background */
+    body {
+      background-image: url('bus-background.jpg'); /* Replace with the correct path to your bus image */
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 20px;
+      color: #fff;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    table {
+      width: 90%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: #007BFF; /* Blue background for the table */
+      color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #0056b3; /* Darker blue for the header */
+    }
+
+    table tr:hover {
+      background-color: #0056b3; /* Highlight row on hover */
+    }
+  </style>
+</head>
+<body>
+
+<h2>Discounts</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Discount ID</th>
+      <th>Code</th>
+      <th>Percentage</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Applicable To</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>SUMMER20</td>
+      <td>20%</td>
+      <td>2025-06-01</td>
+      <td>2025-06-30</td>
+      <td>All Routes</td>
+      <td>Active</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>WINTER15</td>
+      <td>15%</td>
+      <td>2025-12-01</td>
+      <td>2025-12-31</td>
+      <td>Selected Routes</td>
+      <td>Active</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

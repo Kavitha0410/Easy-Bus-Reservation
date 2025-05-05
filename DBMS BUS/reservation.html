@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reservation Table</title>
+  <style>
+    /* Add a bus image as the background */
+    body {
+      background-image: url('bus-background.jpg'); /* Replace with the path to your bus image */
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 20px;
+      color: #fff;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    input#searchBar {
+      display: block;
+      margin: 20px auto;
+      padding: 10px;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    table {
+      width: 90%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: #007BFF; /* Blue background for the table */
+      color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #0056b3; /* Darker blue for the header */
+    }
+
+    table tr:hover {
+      background-color: #0056b3; /* Highlight row on hover */
+    }
+
+    .confirmed {
+      color: #28a745; /* Green for confirmed */
+    }
+
+    .pending {
+      color: #ffc107; /* Orange for pending */
+    }
+
+    /* Pagination buttons */
+    div.pagination {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    div.pagination button {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      margin: 0 5px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    div.pagination button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Reservation Table</h2>
+<input type="text" id="searchBar" placeholder="Search reservations..." onkeyup="filterTable()">
+
+<table>
+  <tr>
+    <th>Reservation_ID</th><th>Passenger_ID</th><th>Schedule_ID</th><th>Reservation_Date</th><th>Number_of_Seats</th><th>Total_Amount</th><th>Status</th>
+  </tr>
+  <tr><td>1</td><td>3</td><td>1</td><td>2025-02-10 20:30:00</td><td>2</td><td>1158.94</td><td class="confirmed">Confirmed</td></tr>
+  <tr><td>2</td><td>1</td><td>2</td><td>2025-04-10 23:00:00</td><td>1</td><td>599.99</td><td class="pending">Pending</td></tr>
+  <tr><td>3</td><td>4</td><td>2</td><td>2025-04-10 23:06:00</td><td>2</td><td>599.99</td><td class="pending">Pending</td></tr>
+  <tr><td>4</td><td>5</td><td>1</td><td>2025-04-17 23:08:00</td><td>1</td><td>599.99</td><td class="pending">Pending</td></tr>
+  <tr><td>5</td><td>6</td><td>2</td><td>2025-04-17 23:45:00</td><td>2</td><td>1009.99</td><td class="confirmed">Confirmed</td></tr>
+</table>
+
+<script>
+  function filterTable() {
+    const input = document.getElementById('searchBar');
+    const filter = input.value.toUpperCase();
+    const table = document.querySelector('table');
+    const rows = table.getElementsByTagName('tr');
+    
+    for (let i = 1; i < rows.length; i++) {
+      const cells = rows[i].getElementsByTagName('td');
+      let match = false;
+      for (let j = 0; j < cells.length; j++) {
+        if (cells[j].innerText.toUpperCase().indexOf(filter) > -1) {
+          match = true;
+          break;
+        }
+      }
+      rows[i].style.display = match ? '' : 'none';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const rowsPerPage = 3;
+    const table = document.querySelector('table');
+    const rows = Array.from(table.querySelectorAll('tr')).slice(1); // Exclude header
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
+    let currentPage = 1;
+
+    function renderTable() {
+      rows.forEach((row, index) => {
+        row.style.display = (index >= (currentPage - 1) * rowsPerPage && index < currentPage * rowsPerPage) ? '' : 'none';
+      });
+    }
+
+    function createPagination() {
+      const pagination = document.createElement('div');
+      pagination.className = 'pagination';
+
+      for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement('button');
+        button.innerText = i;
+        button.onclick = () => {
+          currentPage = i;
+          renderTable();
+        };
+        pagination.appendChild(button);
+      }
+      table.parentElement.appendChild(pagination);
+    }
+
+    renderTable();
+    createPagination();
+  });
+</script>
+
+</body>
+</html>
