@@ -1,2 +1,2 @@
-# Welcome to easy bus booking
+# Welcome to RouteMate
 
